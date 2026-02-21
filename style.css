@@ -1,0 +1,163 @@
+/* --- 全体レイアウト --- */
+body {
+  background-color: #f0f2f5;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  gap: 40px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.input-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input,
+textarea,
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* --- カラーパレット --- */
+.palette-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.palette-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+/* style.css の .swatch 部分を書き換え */
+.swatch {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%; /* 丸いボタンにするとよりパレットっぽい */
+  border: 2px solid #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: 0.2s;
+  /* 背景色と模様の色の2色が見えるようにする（JSで設定） */
+}
+.swatch.active {
+  border-color: #333;
+  transform: scale(1.1);
+}
+
+/* --- プレビューエリア（便箋） --- */
+.preview-area {
+  flex: 1;
+}
+
+.letter-canvas {
+  background-color: #fff;
+  width: 100%;
+  aspect-ratio: 1 / 1.414; /* A4比率 */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: relative;
+  /* 背景画像はJSで動的に適用するためここでは空 */
+}
+
+.text-to {
+  align-self: flex-start;
+  font-size: 1.2rem;
+  margin: 0;
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+}
+
+.text-body {
+  flex-grow: 1;
+  display: block;
+  text-align: left;
+  font-size: 1.1rem;
+  line-height: 2em;
+  padding-top: 0.5em;
+  white-space: pre-wrap;
+
+  /* 罫線の色を 0.1 → 0.3 に濃くしたよ */
+  /* ついでに線の太さを 98% → 97% にして、少しだけ存在感を出してみた */
+  background-image: linear-gradient(
+    to bottom,
+    transparent 97%,
+    rgba(0, 0, 0, 0.3) 97%
+  );
+  background-size: 100% 2em;
+  background-attachment: local;
+}
+
+.text-from {
+  align-self: flex-end;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* --- 保存ボタン・フッター --- */
+#saveBtn {
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.site-footer {
+  font-size: 10px;
+  color: #999;
+  text-align: center;
+  margin-top: 40px;
+  padding-bottom: 20px;
+}
+
+/* --- スマホ対応 --- */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .palette-container {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}
+
+.copyright-on-letter {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 8px;
+  color: rgba(0, 0, 0, 0.3); /* かなり薄め */
+  margin: 0;
+  font-family: sans-serif; /* 読みやすさ重視 */
+}

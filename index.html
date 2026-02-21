@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>お手紙メーカー</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Kaisei+Tokumin&family=M+PLUS+1p&family=M+PLUS+Rounded+1c&family=Noto+Sans+JP&family=Noto+Serif+JP&family=Yomogi&family=Yuji+Syuku&family=Zen+Kurenaido&family=Zen+Maru+Gothic&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-area">
+        <h2>お手紙メーカー</h2>
+        <input type="text" id="inputTo" placeholder="宛名" />
+        <textarea
+          id="inputBody"
+          placeholder="本文をここに..."
+          rows="10"
+        ></textarea>
+        <input type="text" id="inputFrom" placeholder="差出人" />
+
+        <div class="control-group">
+          <label for="fontSelect">フォント：</label>
+          <select id="fontSelect">
+            <optgroup label="明朝体">
+              <option value="'Noto Serif JP', serif">
+                Noto Serif JP（標準）
+              </option>
+              <option value="'Hina Mincho', serif">ひな明朝（優雅）</option>
+            </optgroup>
+            <optgroup label="ゴシック体">
+              <option value="'Noto Sans JP', sans-serif">
+                Noto Sans JP（標準）
+              </option>
+              <option value="'M PLUS 1p', sans-serif">M PLUS 1p</option>
+            </optgroup>
+            <optgroup label="手書き風">
+              <option value="'Zen Kurenaido', sans-serif">
+                Zen 紅禮泥（綺麗め）
+              </option>
+              <option value="'Yomogi', cursive">
+                よもぎフォント（可愛い）
+              </option>
+            </optgroup>
+            <optgroup label="丸文字">
+              <option value="'Zen Maru Gothic', sans-serif">
+                Zen 丸ゴシック
+              </option>
+              <option value="'M PLUS Rounded 1c', sans-serif">
+                M PLUS Rounded（ポップ）
+              </option>
+            </optgroup>
+            <optgroup label="筆文字・レトロ">
+              <option value="'Yuji Syuku', serif">遊児 宿（筆文字）</option>
+              <option value="'Kaisei Tokumin', serif">
+                解星 特ミン（レトロ）
+              </option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="bgSelect">便箋の模様：</label>
+          <select id="bgSelect">
+            <option value="none">無地</option>
+            <option value="bg-hideout" selected>隠れ家</option>
+            <option value="bg-star-small">小さな星</option>
+            <option value="bg-brick">レンガの壁</option>
+            <option value="bg-floral">浮かぶ歯車</option>
+            <option value="bg-circuit">ダイヤモンド</option>
+            <option value="bg-mesh">ドクロ</option>
+          </select>
+        </div>
+
+        <div class="palette-wrapper">
+          <label>便箋のカラーテーマ：</label>
+          <div id="themePalette" class="palette-container"></div>
+        </div>
+
+        <button id="saveBtn">画像として保存する</button>
+      </div>
+
+      <hr />
+
+      <div class="preview-area">
+        <h2>プレビュー</h2>
+        <div id="letterCanvas" class="letter-canvas">
+          <p id="viewTo" class="text-to">宛名がここに出るよ</p>
+          <div id="viewBody" class="text-body">本文がここに出るよ</div>
+          <p id="viewFrom" class="text-from">差出人がここに出るよ</p>
+          <p class="copyright-on-letter">&copy; 2026 eemee203</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      &copy; 2026 eemee203 | Patterns by
+      <a href="http://www.heropatterns.com/" target="_blank">Hero Patterns</a> |
+      Fonts via
+      <a href="https://fonts.google.com/" target="_blank">Google Fonts</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
