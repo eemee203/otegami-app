@@ -161,3 +161,14 @@ select {
   margin: 0;
   font-family: sans-serif; /* 読みやすさ重視 */
 }
+
+#shareBtn {
+  display: none; /* デフォルトは非表示 */
+}
+
+/* 画面幅が1024px以下（タブレット・スマホ）の時だけ表示 */
+@media (max-width: 1024px) {
+  #shareBtn {
+    display: inline-block; /* または block */
+  }
+}

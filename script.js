@@ -180,3 +180,14 @@ saveBtn.addEventListener("click", () => {
 bgSelect.addEventListener("change", updateBackground);
 createThemePalette();
 updateBackground();
+
+// SNSで共有
+const shareBtn = document.getElementById('shareBtn');
+
+// ページ読み込み時にチェック
+window.addEventListener('load', () => {
+  // Web Share APIに対応していないブラウザならボタンを完全に消す
+  if (!navigator.share) {
+    shareBtn.style.display = 'none';
+  }
+});
