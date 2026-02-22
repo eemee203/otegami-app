@@ -182,23 +182,69 @@ createThemePalette();
 updateBackground();
 
 // SNSで共有
-const shareBtn = document.getElementById('shareBtn');
+const shareBtn = document.getElementById("shareBtn");
 const appUrl = "https://otegamimaker.netlify.app/";
 const shareText = "手書き風の画像が作れる「お手紙メーカー」！ #お手紙メーカー";
 
 // 共有機能の有無をチェック
 if (!navigator.share) {
-  shareBtn.style.display = 'none';
+  shareBtn.style.display = "none";
 }
 
-shareBtn.addEventListener('click', async () => {
+shareBtn.addEventListener("click", async () => {
   try {
     await navigator.share({
-      title: 'お手紙メーカー',
+      title: "お手紙メーカー",
       text: shareText,
-      url: appUrl
+      url: appUrl,
     });
   } catch (error) {
-    console.log('共有キャンセル、または失敗:', error);
+    console.log("共有キャンセル、または失敗:", error);
   }
+});
+
+// --- 入力内容の保存と復元機能ここから ---
+const inputIds = ['inputTo', 'inputBody', 'inputFrom'];
+const viewIds = {
+  'inputTo': 'viewTo',
+  'inputBody': 'viewBody',
+  'inputFrom': 'viewFrom'
+};
+
+// 1. ページを開いた時に、保存されている内容を復元する
+window.addEventListener('DOMContentLoaded', () => {
+  inputIds.forEach(id => {
+    const savedValue = localStorage.getItem(id);
+    if (savedValue) {
+      // 入力欄に値を戻す
+      const inputEl = document.getElementById(id);
+      inputEl.value = savedValue;
+
+      // プレビュー側にも反映させる
+      const viewEl = document.getElementById(viewIds[id]);
+      if (id === 'inputBody') {
+        viewEl.innerText = savedValue; // 改行を反映
+      } else {
+        viewEl.textContent = savedValue;
+      }
+    }
+  });
+});
+
+// 2. 文字を入力するたびに、リアルタイムで保存する
+inputIds.forEach(id => {
+  const inputEl = document.getElementById(id);
+  const viewEl = document.getElementById(viewIds[id]);
+
+  inputEl.addEventListener('input', () => {
+    // ブラウザに保存
+    localStorage.setItem(id, inputEl.value);
+
+    // プレビューに反映
+    if (id === 'inputBody') {
+      viewEl.innerText = inputEl.value;
+    } else {
+      viewEl.textContent = inputEl.value;
+    }
+  });
 });
