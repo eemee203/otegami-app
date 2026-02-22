@@ -248,3 +248,31 @@ inputIds.forEach(id => {
     }
   });
 });
+
+window.addEventListener('DOMContentLoaded', () => {
+    const clearBtn = document.getElementById('clearBtn');
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            // 1. 確認ダイアログ（これで出るはず！）
+            if (!confirm('入力内容をすべて消去しますか？')) return;
+
+            // 2. 入力フォームの値を空にする
+            document.getElementById('inputTo').value = '';
+            document.getElementById('inputBody').value = '';
+            document.getElementById('inputFrom').value = '';
+
+            // 3. プレビュー表示をデフォルトに戻す
+            document.getElementById('viewTo').innerText = '宛名がここに出るよ';
+            document.getElementById('viewBody').innerText = '本文がここに出るよ';
+            document.getElementById('viewFrom').innerText = '差出人がここに出るよ';
+
+            // 4. 保存されているデータを削除（保存時と同じ名前に修正！）
+            localStorage.removeItem('inputTo');
+            localStorage.removeItem('inputBody');
+            localStorage.removeItem('inputFrom');
+
+            alert('クリアしました！');
+        });
+    }
+});
