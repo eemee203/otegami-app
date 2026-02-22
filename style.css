@@ -172,3 +172,69 @@ select {
     display: inline-block; /* または block */
   }
 }
+
+/* モーダル（画像表示枠）のスタイル */
+/* モーダル全体：画面中央に配置 */
+#imageModal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85); /* 少し暗めにして画像を見やすく */
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* 画面端に余裕を持たせる */
+  box-sizing: border-box;
+}
+
+/* 白い枠：画面の高さに合わせて縮むように設定 */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  
+  /* --- ここが重要！ --- */
+  max-width: 95%;      /* 横幅がはみ出さないように */
+  max-height: 90vh;    /* 画面の高さの90%までに収める */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 画像：枠の中に収まるように自動リサイズ */
+#resultImage {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;    /* 画像だけで画面の70%までに制限 */
+  object-fit: contain; /* 縦横比を保ったまま収める */
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.close-circle-btn {
+  position: absolute;
+  top: -15px;    /* 枠から少しはみ出すとおしゃれ */
+  right: -15px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%; /* これで綺麗な丸になる */
+  background-color: #fff;
+  border: 2px solid #333;
+  color: #333;
+  font-size: 24px;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  padding: 0;
+  z-index: 10001; /* 確実に一番上にくるように */
+}
+
+.close-circle-btn:active {
+  background-color: #eee; /* 押した時の反応 */
+}

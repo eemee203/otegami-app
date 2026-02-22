@@ -138,7 +138,6 @@ function updateBackground() {
 }
 
 // パレット生成
-// script.js の createThemePalette 関数内を少し修正
 function createThemePalette() {
   const container = document.getElementById("themePalette");
   container.innerHTML = ""; // 一旦クリア（再描画用）
@@ -167,13 +166,24 @@ function createThemePalette() {
 }
 
 // 保存機能
+// 保存ボタンの動作を「画像表示」に切り替え
 saveBtn.addEventListener("click", () => {
+  // html2canvasで画像を作成
   html2canvas(letterCanvas).then((canvas) => {
-    const link = document.createElement("a");
-    link.download = "my-letter.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+    const imageModal = document.getElementById("imageModal");
+    const resultImage = document.getElementById("resultImage");
+
+    // 1. 生成した画像をimg要素のsrcにセット
+    resultImage.src = canvas.toDataURL("image/png");
+
+    // 2. 隠しておいたモーダル（表示枠）を見せる
+    imageModal.style.display = "flex";
   });
+});
+
+// 「閉じる」ボタンの動作も追加
+document.getElementById("closeModal").addEventListener("click", () => {
+  document.getElementById("imageModal").style.display = "none";
 });
 
 // イベント登録と初期化
