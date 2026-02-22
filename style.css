@@ -100,9 +100,9 @@ select {
   flex-grow: 1;
   display: block;
   text-align: left;
-  font-size: 1.1rem;
-  line-height: 2em;
-  padding-top: 0.5em;
+  font-size: 18px !important;
+  line-height: 32px !important;
+  padding-top: 5px;
   white-space: pre-wrap;
 
   /* 罫線の色を 0.1 → 0.3 に濃くしたよ */
@@ -112,7 +112,7 @@ select {
     transparent 97%,
     rgba(0, 0, 0, 0.3) 97%
   );
-  background-size: 100% 2em;
+  background-size: 100% 32px;
   background-attachment: local;
 }
 
