@@ -183,11 +183,22 @@ updateBackground();
 
 // SNSで共有
 const shareBtn = document.getElementById('shareBtn');
+const appUrl = "https://otegamimaker.netlify.app/";
+const shareText = "手書き風の画像が作れる「お手紙メーカー」！ #お手紙メーカー";
 
-// ページ読み込み時にチェック
-window.addEventListener('load', () => {
-  // Web Share APIに対応していないブラウザならボタンを完全に消す
-  if (!navigator.share) {
-    shareBtn.style.display = 'none';
+// 共有機能の有無をチェック
+if (!navigator.share) {
+  shareBtn.style.display = 'none';
+}
+
+shareBtn.addEventListener('click', async () => {
+  try {
+    await navigator.share({
+      title: 'お手紙メーカー',
+      text: shareText,
+      url: appUrl
+    });
+  } catch (error) {
+    console.log('共有キャンセル、または失敗:', error);
   }
 });
