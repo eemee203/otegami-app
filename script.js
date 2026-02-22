@@ -45,7 +45,7 @@ const colorThemes = [
   { name: "銀鼠（スノーホワイト）", bg: "#f8f9fa", pattern: "#495057" },
 ];
 
-// 初期値も少し暗めの「銀鼠」あたりに変えておこうか
+// 初期値「銀鼠」
 let currentBgColor = colorThemes[9].bg;
 let currentPatternColor = colorThemes[9].pattern;
 
@@ -136,6 +136,7 @@ function updateBackground() {
     letterCanvas.style.backgroundImage = "none";
   }
 }
+
 // パレット生成
 // script.js の createThemePalette 関数内を少し修正
 function createThemePalette() {
