@@ -49,21 +49,38 @@ select {
 }
 
 .palette-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+  display: flex; /* grid から変更 */
+  flex-wrap: nowrap; /* 改行を禁止する */
+  overflow-x: auto; /* はみ出したら横スクロールを出す */
+  gap: 5px;
+  padding: 5px 0 10px 0; /* 下に少し余白を作るとスクロールしやすい */
+
+  /* スマホでのスクロールを滑らかにする（おまじない） */
+  -webkit-overflow-scrolling: touch;
 }
 
-/* style.css の .swatch 部分を書き換え */
+/* スクロールバーが邪魔なら隠す設定（任意） */
+.palette-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari用 */
+}
+
+.palette-container {
+  -ms-overflow-style: none; /* IE, Edge用 */
+  scrollbar-width: none; /* Firefox用 */
+}
+
 .swatch {
-  aspect-ratio: 1 / 1;
-  border-radius: 50%; /* 丸いボタンにするとよりパレットっぽい */
+  width: 32px; /* サイズを明示的に指定 */
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
   border: 2px solid #fff;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: 0.2s;
-  /* 背景色と模様の色の2色が見えるようにする（JSで設定） */
+  margin: 2px; /* 外側に少し隙間を作って、黒丸の居場所を確保 */
+  box-sizing: border-box; /* 32pxの中にフチも含める設定 */
 }
+
 .swatch.active {
   border-color: #333;
   transform: scale(1.1);

@@ -31,23 +31,23 @@ fontSelect.addEventListener(
 );
 
 // カラーテーマ設定
-// 目に優しい「深いくすみカラー」のペアセット
 const colorThemes = [
+  { name: "銀鼠（スノーホワイト）", bg: "#f8f9fa", pattern: "#495057" },
+  { name: "鉄黒（クールグレー）", bg: "#e2e2e2", pattern: "#1a1a1a" },
   { name: "茜（明るい赤）", bg: "#ffadad", pattern: "#ff0000" },
+  { name: "薄桜（ピンク）", bg: "#ffe5ec", pattern: "#e4689a" },
   { name: "瑠璃（澄んだ青）", bg: "#9bf6ff", pattern: "#00b4d8" },
   { name: "松葉（若草色）", bg: "#caffbf", pattern: "#2b9348" },
   { name: "金茶（ひまわり）", bg: "#fdffb6", pattern: "#ffcc00" },
   { name: "菖蒲（ラベンダー）", bg: "#bdb2ff", pattern: "#5a189a" },
   { name: "柿（ビタミンオレンジ）", bg: "#ffdca1", pattern: "#fb5607" },
   { name: "焦茶（キャラメル）", bg: "#f0d5be", pattern: "#8a5a44" },
-  { name: "鉄黒（クールグレー）", bg: "#e2e2e2", pattern: "#1a1a1a" },
   { name: "海松色（ライム）", bg: "#e5ffad", pattern: "#70e000" },
-  { name: "銀鼠（スノーホワイト）", bg: "#f8f9fa", pattern: "#495057" },
 ];
 
 // 初期値「銀鼠」
-let currentBgColor = colorThemes[9].bg;
-let currentPatternColor = colorThemes[9].pattern;
+let currentBgColor = colorThemes[0].bg;
+let currentPatternColor = colorThemes[0].pattern;
 
 // HideoutのSVG生成関数
 const generateHideout = (color) => {
@@ -214,16 +214,16 @@ shareBtn.addEventListener("click", async () => {
 });
 
 // --- 入力内容の保存と復元機能ここから ---
-const inputIds = ['inputTo', 'inputBody', 'inputFrom'];
+const inputIds = ["inputTo", "inputBody", "inputFrom"];
 const viewIds = {
-  'inputTo': 'viewTo',
-  'inputBody': 'viewBody',
-  'inputFrom': 'viewFrom'
+  inputTo: "viewTo",
+  inputBody: "viewBody",
+  inputFrom: "viewFrom",
 };
 
 // 1. ページを開いた時に、保存されている内容を復元する
-window.addEventListener('DOMContentLoaded', () => {
-  inputIds.forEach(id => {
+window.addEventListener("DOMContentLoaded", () => {
+  inputIds.forEach((id) => {
     const savedValue = localStorage.getItem(id);
     if (savedValue) {
       // 入力欄に値を戻す
@@ -232,7 +232,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
       // プレビュー側にも反映させる
       const viewEl = document.getElementById(viewIds[id]);
-      if (id === 'inputBody') {
+      if (id === "inputBody") {
         viewEl.innerText = savedValue; // 改行を反映
       } else {
         viewEl.textContent = savedValue;
@@ -242,16 +242,16 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // 2. 文字を入力するたびに、リアルタイムで保存する
-inputIds.forEach(id => {
+inputIds.forEach((id) => {
   const inputEl = document.getElementById(id);
   const viewEl = document.getElementById(viewIds[id]);
 
-  inputEl.addEventListener('input', () => {
+  inputEl.addEventListener("input", () => {
     // ブラウザに保存
     localStorage.setItem(id, inputEl.value);
 
     // プレビューに反映
-    if (id === 'inputBody') {
+    if (id === "inputBody") {
       viewEl.innerText = inputEl.value;
     } else {
       viewEl.textContent = inputEl.value;
@@ -259,30 +259,30 @@ inputIds.forEach(id => {
   });
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-    const clearBtn = document.getElementById('clearBtn');
+window.addEventListener("DOMContentLoaded", () => {
+  const clearBtn = document.getElementById("clearBtn");
 
-    if (clearBtn) {
-        clearBtn.addEventListener('click', () => {
-            // 1. 確認ダイアログ（これで出るはず！）
-            if (!confirm('入力内容をすべて消去しますか？')) return;
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      // 1. 確認ダイアログ（これで出るはず！）
+      if (!confirm("入力内容をすべて消去しますか？")) return;
 
-            // 2. 入力フォームの値を空にする
-            document.getElementById('inputTo').value = '';
-            document.getElementById('inputBody').value = '';
-            document.getElementById('inputFrom').value = '';
+      // 2. 入力フォームの値を空にする
+      document.getElementById("inputTo").value = "";
+      document.getElementById("inputBody").value = "";
+      document.getElementById("inputFrom").value = "";
 
-            // 3. プレビュー表示をデフォルトに戻す
-            document.getElementById('viewTo').innerText = '宛名がここに出るよ';
-            document.getElementById('viewBody').innerText = '本文がここに出るよ';
-            document.getElementById('viewFrom').innerText = '差出人がここに出るよ';
+      // 3. プレビュー表示をデフォルトに戻す
+      document.getElementById("viewTo").innerText = "宛名がここに出るよ";
+      document.getElementById("viewBody").innerText = "本文がここに出るよ";
+      document.getElementById("viewFrom").innerText = "差出人がここに出るよ";
 
-            // 4. 保存されているデータを削除（保存時と同じ名前に修正！）
-            localStorage.removeItem('inputTo');
-            localStorage.removeItem('inputBody');
-            localStorage.removeItem('inputFrom');
+      // 4. 保存されているデータを削除（保存時と同じ名前に修正！）
+      localStorage.removeItem("inputTo");
+      localStorage.removeItem("inputBody");
+      localStorage.removeItem("inputFrom");
 
-            alert('クリアしました！');
-        });
-    }
+      alert("クリアしました！");
+    });
+  }
 });
