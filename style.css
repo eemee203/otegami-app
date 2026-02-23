@@ -75,8 +75,15 @@ select {
 }
 
 .letter-canvas {
+  /* スマホの標準的な幅（iPhone等）に固定 */
+  width: 350px;
+  /* 画面より大きい場合に備えて、最大幅は100%にしておく */
+  max-width: 100%;
+  /* PCで見た時に中央に来るように設定 */
+  margin: 0 auto;
+
   background-color: #fff;
-  width: 100%;
+
   aspect-ratio: 1 / 1.414; /* A4比率 */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   padding: 40px;
@@ -86,6 +93,11 @@ select {
   box-sizing: border-box;
   position: relative;
   /* 背景画像はJSで動的に適用するためここでは空 */
+}
+
+#viewBody {
+  white-space: pre-wrap; /* 改行や空白をそのまま反映する */
+  word-break: break-all; /* 単語の途中でも端に来たら折り返す */
 }
 
 .text-to {
@@ -178,9 +190,11 @@ select {
 #imageModal {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.85); /* 少し暗めにして画像を見やすく */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85); /* 少し暗めにして画像を見やすく */
   z-index: 9999;
   justify-content: center;
   align-items: center;
@@ -195,10 +209,10 @@ select {
   border-radius: 10px;
   text-align: center;
   position: relative;
-  
+
   /* --- ここが重要！ --- */
-  max-width: 95%;      /* 横幅がはみ出さないように */
-  max-height: 90vh;    /* 画面の高さの90%までに収める */
+  max-width: 95%; /* 横幅がはみ出さないように */
+  max-height: 90vh; /* 画面の高さの90%までに収める */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -208,7 +222,7 @@ select {
 #resultImage {
   width: 100%;
   height: auto;
-  max-height: 70vh;    /* 画像だけで画面の70%までに制限 */
+  max-height: 70vh; /* 画像だけで画面の70%までに制限 */
   object-fit: contain; /* 縦横比を保ったまま収める */
   border: 1px solid #ccc;
   margin-top: 10px;
@@ -216,7 +230,7 @@ select {
 
 .close-circle-btn {
   position: absolute;
-  top: -15px;    /* 枠から少しはみ出すとおしゃれ */
+  top: -15px; /* 枠から少しはみ出すとおしゃれ */
   right: -15px;
   width: 34px;
   height: 34px;
@@ -230,7 +244,7 @@ select {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   padding: 0;
   z-index: 10001; /* 確実に一番上にくるように */
 }
