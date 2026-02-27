@@ -180,19 +180,31 @@ function splitTextIntoPages(text, hasTo) {
   text = text.replace(/^\n+/, "");
   const pages = [];
   let currentText = "";
+
   const tester = document.createElement("div");
   tester.className = "text-body";
   tester.style.position = "absolute";
   tester.style.visibility = "hidden";
-  tester.style.width = "270px";
   tester.style.fontFamily = fontSelect.value;
+  
+  // ▼ 魔法のコード：今現在の便箋の実寸幅を取得して計算に使う！
+  const canvasWidth = letterCanvas.clientWidth || 350;
+  tester.style.width = (canvasWidth - 80) + "px"; // padding左右分(80)を引く
+  
   document.body.appendChild(tester);
-  const maxInnerHeight = 270;
+
+  // ▼ 高さの限界も、実寸の幅（正方形なので幅＝高さ）から動的に計算する！
+  const maxInnerHeight = canvasWidth - 80;
+
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
     const isFirstPage = pages.length === 0;
+    
+    // 宛名がある場合のみ、1枚目の限界を35px下げる
     let limit = isFirstPage && hasTo ? maxInnerHeight - 35 : maxInnerHeight;
+
     tester.textContent = currentText + char;
+
     if (tester.offsetHeight > limit && currentText.length > 0) {
       pages.push(currentText);
       currentText = char === "\n" ? "" : char;
@@ -200,7 +212,11 @@ function splitTextIntoPages(text, hasTo) {
       currentText += char;
     }
   }
-  if (currentText.length > 0) pages.push(currentText);
+
+  if (currentText.length > 0) {
+    pages.push(currentText);
+  }
+
   document.body.removeChild(tester);
   return pages.length > 0 ? pages : [""];
 }
