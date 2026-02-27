@@ -15,7 +15,6 @@
     />
   </head>
 
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKHMT954R1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -38,6 +37,13 @@
 
         <button type="button" id="clearBtn">内容をクリア</button>
 
+        <div class="control-group">
+          <label for="sizeSelect">画像サイズ：</label>
+          <select id="sizeSelect">
+            <option value="vertical" selected>縦長（A4比率）</option>
+            <option value="square">正方形（複数ページ）</option>
+          </select>
+        </div>
         <div class="control-group">
           <label for="fontSelect">フォント：</label>
           <select id="fontSelect">
@@ -159,8 +165,7 @@
             <option value="bg-mesh">ドクロ</option>
             <option value="bg-heart-line">ハート</option>
             <option value="bg-dot-heart">ドットハート</option>
-            <!-- <option value="bg-blossom">桜</option> -->
-          </select>
+            </select>
         </div>
 
         <div class="palette-wrapper">
@@ -173,13 +178,16 @@
 
       <div class="preview-area">
         <h2>プレビュー</h2>
-        <div id="letterCanvas" class="letter-canvas">
-          <p id="viewTo" class="text-to"></p>
-          <div id="viewBody" class="text-body"></div>
-          <p id="viewFrom" class="text-from"></p>
-          <p class="copyright-on-letter">Created by お手紙メーカー</p>
+        <div id="verticalPreview">
+          <div id="letterCanvas" class="letter-canvas vertical">
+            <p id="viewTo" class="text-to"></p>
+            <div id="viewBody" class="text-body"></div>
+            <p id="viewFrom" class="text-from"></p>
+            <p class="copyright-on-letter">Created by お手紙メーカー</p>
+          </div>
         </div>
-      </div>
+        <div id="squarePreview" style="display: none; flex-direction: column; gap: 20px;"></div>
+        </div>
     </div>
 
     <hr />
@@ -222,12 +230,14 @@
         <p style="margin-bottom: 10px; color: #333; font-size: 14px">
           画像を長押しして保存
         </p>
+        
         <img
           id="resultImage"
           src=""
           style="width: 100%; border: 1px solid #ccc"
         />
-      </div>
+        <div id="modalImagesContainer"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>

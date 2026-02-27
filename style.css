@@ -143,6 +143,7 @@ select {
   line-height: 32px !important;
   padding-top: 5px;
   white-space: pre-wrap;
+  word-break: break-all;
 
   background-image: linear-gradient(
     to bottom,
@@ -222,7 +223,7 @@ select {
 }
 
 /* モーダル（画像表示枠）のスタイル */
-/* モーダル全体：画面中央に配置 */
+/* モーダル全体：はみ出た場合はスクロールできるように設定 */
 #imageModal {
   display: none;
   position: fixed;
@@ -233,35 +234,35 @@ select {
   background: rgba(0, 0, 0, 0.85); /* 少し暗めにして画像を見やすく */
   z-index: 9999;
   justify-content: center;
-  align-items: center;
-  padding: 20px; /* 画面端に余裕を持たせる */
+  align-items: flex-start; /* centerから変更。上が見切れるのを防ぐ */
+  padding: 40px 20px; /* 上下に余裕を持たせる */
   box-sizing: border-box;
+  overflow-y: auto; /* 全体を縦スクロール可能にする */
 }
 
-/* 白い枠：画面の高さに合わせて縮むように設定 */
+/* 白い枠：中身（画像）に合わせてどこまでも伸びるように設定 */
 .modal-content {
   background: white;
-  padding: 20px;
+  padding: 30px 20px 20px 20px;
   border-radius: 10px;
   text-align: center;
   position: relative;
-
-  /* --- ここが重要！ --- */
-  max-width: 95%; /* 横幅がはみ出さないように */
-  max-height: 90vh; /* 画面の高さの90%までに収める */
+  width: 100%;
+  max-width: 400px; /* 横幅が広がりすぎないように */
+  height: auto; /* max-heightを削除し、中身に合わせて高さを自動調整 */
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto; /* 上下の中央固定を解除し、上から順に配置 */
 }
 
 /* 画像：枠の中に収まるように自動リサイズ */
 #resultImage {
   width: 100%;
   height: auto;
-  max-height: 70vh; /* 画像だけで画面の70%までに制限 */
-  object-fit: contain; /* 縦横比を保ったまま収める */
   border: 1px solid #ccc;
   margin-top: 10px;
+  /* 縦長の時用の max-height も削除し、自由に伸ばす */
 }
 
 .close-circle-btn {
@@ -287,4 +288,26 @@ select {
 
 .close-circle-btn:active {
   background-color: #eee; /* 押した時の反応 */
+}
+
+.letter-canvas.vertical {
+  aspect-ratio: 1 / 1.414;
+}
+
+.letter-canvas.square {
+  aspect-ratio: 1 / 1 !important;
+  height: 350px !important;
+  overflow: hidden;
+}
+
+#modalImagesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+#modalImagesContainer img {
+  width: 100%;
+  border: 1px solid #ccc;
 }
