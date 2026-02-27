@@ -338,3 +338,27 @@ if (clearBtn) {
     updateSquarePreview();
   });
 }
+
+// SNSで共有
+const shareBtn = document.getElementById("shareBtn");
+
+const appUrl = window.location.href; 
+const shareText = "手書き風の画像が作れる「お手紙メーカー」！ #お手紙メーカー";
+
+if (shareBtn) {
+  if (!navigator.share) {
+    shareBtn.style.display = "none";
+  } else {
+    shareBtn.addEventListener("click", async () => {
+      try {
+        await navigator.share({
+          title: "お手紙メーカー",
+          text: shareText,
+          url: appUrl,
+        });
+      } catch (error) {
+        console.log("共有キャンセル、または失敗:", error);
+      }
+    });
+  }
+}
