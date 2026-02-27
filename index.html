@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>お手紙メーカー</title>
-    <meta name="description" content="手書き風の温かいお手紙画像が作れる『お手紙メーカー』。SNSでのメッセージや推し活にぴったりの、心温まるレター作成ツールです。">
+    <meta
+      name="description"
+      content="手書き風の温かいお手紙画像が作れる『お手紙メーカー』。SNSでのメッセージや推し活にぴったりの、心温まるレター作成ツールです。"
+    />
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,12 +18,17 @@
     />
   </head>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKHMT954R1"></script>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-JKHMT954R1"
+  ></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-JKHMT954R1');
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-JKHMT954R1");
   </script>
 
   <body>
@@ -149,7 +157,6 @@
                 ドットゴシック16（ゲーム風）
               </option>
             </optgroup>
-
           </select>
         </div>
 
@@ -165,7 +172,7 @@
             <option value="bg-mesh">ドクロ</option>
             <option value="bg-heart-line">ハート</option>
             <option value="bg-dot-heart">ドットハート</option>
-            </select>
+          </select>
         </div>
 
         <div class="palette-wrapper">
@@ -186,8 +193,11 @@
             <p class="copyright-on-letter">Created by お手紙メーカー</p>
           </div>
         </div>
-        <div id="squarePreview" style="display: none; flex-direction: column; gap: 20px;"></div>
-        </div>
+        <div
+          id="squarePreview"
+          style="display: none; flex-direction: column; gap: 20px"
+        ></div>
+      </div>
     </div>
 
     <hr />
@@ -230,14 +240,14 @@
         <p style="margin-bottom: 10px; color: #333; font-size: 14px">
           画像を長押しして保存
         </p>
-        
+
         <img
           id="resultImage"
           src=""
           style="width: 100%; border: 1px solid #ccc"
         />
         <div id="modalImagesContainer"></div>
-        </div>
+      </div>
     </div>
 
     <script src="script.js"></script>
