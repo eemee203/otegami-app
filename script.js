@@ -228,7 +228,7 @@ function updateSquarePreview() {
   if (!verticalPreview || !squarePreview) return;
 
   const toText = inputTo.value.trim();
-  const bodyText = inputBody.value || "本文がここに出るよ";
+  const bodyText = inputBody.value;
   const fromText = inputFrom.value.trim();
   const hasTo = toText !== "";
   const hasFrom = fromText !== "";
@@ -336,6 +336,5 @@ if (clearBtn) {
     localStorage.removeItem("inputBody");
     localStorage.removeItem("inputFrom");
     updateSquarePreview();
-    alert("クリアしました！");
   });
 }
